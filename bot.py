@@ -5,9 +5,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from openai import OpenAI
 
 # TOKEN e chave API
-api_telegram = "8121277998:AAHFvbTyxO0EiIRMSy9WSbVER_uQ09R4gzQ"
+api_telegram = "API-BOT-TELEGRAM"
 TOKEN = api_telegram
-social_credit = "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"  # api key openrouter
+openrouterkey = "API-OPENROUTER"  # api key openrouter
 model_mistral = "mistralai/mistral-7b-instruct:free"
 
 # Histórico de mensagens para cada usuário
@@ -28,7 +28,7 @@ def open_ai(user_id: str, text: str) -> str:
     # Configura a chamada para a API
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
-        api_key=social_credit,
+        api_key=openrouterkey,
     )
 
     # Envia o histórico completo para a API para manter o contexto
