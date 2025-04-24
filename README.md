@@ -7,6 +7,8 @@ Python – Linguagem principal.
 Telegram Bot API – Para criar o bot e interagir com usuários.
 OpenRouter – Plataforma intermediária para acesso a diversos modelos de linguagem (neste caso, Mistral).
 
+FFmpeg - Transcrição de audio para texto-prompt
+
 ## Modelos utilizados:
 mistralai/mistral-7b-instruct:free
 openai/gpt-4o (exemplo separado incluído)
@@ -41,21 +43,38 @@ O bot recebe a mensagem através do MessageHandler da biblioteca `python-telegra
 Resposta enviada de volta ao Telegram
 A resposta gerada é enviada de volta ao usuário através da função reply_text() do Telegram.
 
+## Transcrição de audio para prompt
+
+1. Baixa o arquivo `.ogg` com await `file.download_to_drive(...)`.
+
+2. Converte para `.wav` (se necessário).
+
+3. Usa o Whisper local para transcrever.
+
+4. O texto transcrito é enviado como prompt para a IA (OpenRouter).
+   
 ## Como Rodar Localmente
 ```
   git clone https://github.com/FabricioLz/PanteraBot/.git
   cd nome-do-repo
 ```
 ### Dependencias
-  
+
+ffmpeg para o audio
+
+Baixe em: https://www.gyan.dev/ffmpeg/builds/
+
+Extraia e adicione à variável de ambiente `PATH` o caminho da pasta `bin`.
+
 ```
-pip install python-telegram-bot openai
+pip install python-telegram-bot openai-whisper requests
+
 ```
 ### Configure suas chaves de API no código:
 No arquivo bot.py, altere:
 ```
 api_telegram = "SUA_CHAVE_DO_BOT_DO_TELEGRAM"
-openrouterkey = "SUA_CHAVE_DA_API_OPENROUTER"
+social_credit = "SUA_CHAVE_DA_API_OPENROUTER"
 ```
 ### Inicie o bot.
 
